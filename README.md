@@ -21,7 +21,7 @@ Ce projet Android a été conçu dans le cadre d’un examen final pour démontr
      ```kotlin
      Log.d("MainActivity", "Application démarrée")
      Log.e("Database", "Erreur lors de l’initialisation de la base de données")
-   ```
+     ```
 ![Screenshot from 2024-12-12 15-03-04](https://github.com/user-attachments/assets/927487c6-d991-41d6-94c3-efee0b9bbca2)
 ![Screenshot from 2024-12-12 15-03-49](https://github.com/user-attachments/assets/7c9ce847-13b5-40b7-a367-00ddd406e7ce)
 
@@ -30,6 +30,24 @@ Ce projet Android a été conçu dans le cadre d’un examen final pour démontr
 2. **Gestion des Exceptions**
    - NullPointerException : Vérification des objets avant leur utilisation.
    - IndexOutOfBoundsException : Validation des index dans les listes.
+
+      ```kotlin
+      // Exemple 1 : NullPointerException
+        printMessage(null)
+        printMessage("Bonjour Kotlin!")
+
+        // Exemple 2 : IndexOutOfBoundsException
+        val fruits = listOf("Pomme", "Banane", "Cerise")
+        getItemAtIndex(1, fruits) // Correct
+        getItemAtIndex(5, fruits) // Incorrect
+
+        // Exemple 3 : Liste vide
+        val emptyList = listOf<String>()
+        processItems(emptyList) // Affichera un message indiquant que la liste est vide
+
+        val nonEmptyList = listOf("Table", "Chaise")
+        processItems(nonEmptyList) // Traite et affiche les éléments
+      ```
    
 ![Screenshot from 2024-12-12 15-29-53](https://github.com/user-attachments/assets/61284df1-2034-454c-b9ed-92b42ee11005)
 
@@ -46,12 +64,12 @@ Ce projet Android a été conçu dans le cadre d’un examen final pour démontr
 1. **Tests Unitaires avec JUnit**
    - Exemple :
      ```kotlin
-     class CalculatorTest {
-         @Test
-         fun addition_isCorrect() {
-             assertEquals(4, 2 + 2)
-         }
-     }
+        class CalculatorTest {
+            @Test
+            fun addition_isCorrect() {
+                assertEquals(4, 2 + 2)
+            }
+        }
      ```
 
      ![Screenshot from 2024-12-12 15-34-37](https://github.com/user-attachments/assets/12ce6764-0645-420a-ab47-3a5ad265ee4e)
@@ -60,10 +78,10 @@ Ce projet Android a été conçu dans le cadre d’un examen final pour démontr
 2. **Tests d’Interface Utilisateur avec Espresso**
    - Exemple : Vérifier l’affichage d’un bouton :
      ```kotlin
-     @Test
-     fun button_isDisplayed() {
-         onView(withId(R.id.myButton)).check(matches(isDisplayed()))
-     }
+        @Test
+        fun button_isDisplayed() {
+            onView(withId(R.id.myButton)).check(matches(isDisplayed()))
+        }
      ```
 ![Screenshot from 2024-12-12 15-58-14](https://github.com/user-attachments/assets/b41535a4-c92a-4206-8e2e-e85c3502b190)
 
@@ -76,6 +94,23 @@ Ce projet Android a été conçu dans le cadre d’un examen final pour démontr
       - Cliquer sur « Se connecter ».
       - Vérifier l’affichage d’un message de bienvenue.
 
+        ```kotlin
+          @Test
+          fun loginForm_isFunctional() {
+              val scenario = ActivityScenario.launch(MainActivity::class.java)
+              // Saisir le nom d’utilisateur
+              onView(withId(R.id.username)).perform(typeText("user"), closeSoftKeyboard())
+      
+              // Saisir le mot de passe
+              onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard())
+      
+              // Cliquer sur le bouton « Se connecter »
+              onView(withId(R.id.loginButton)).perform(click())
+      
+              // Vérifier que le message de bienvenue est affiché
+              onView(withId(R.id.welcomeMessage)).check(matches(isDisplayed()))
+          }
+       ```
 ---
 
 ![Screenshot from 2024-12-12 16-11-02](https://github.com/user-attachments/assets/beeb7d43-8a99-4a2d-af6e-eb146b0d5ea0)
